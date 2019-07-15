@@ -1,5 +1,5 @@
 package beans;
 
-public class Manager {
+public class Manager extends User {
 
 }
