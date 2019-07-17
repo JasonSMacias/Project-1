@@ -5,7 +5,8 @@ DROP TABLE Employee;
 CREATE TABLE Employee (
   usr_id INTEGER NOT NULL PRIMARY KEY,
   pword VARCHAR2(60) NOT NULL,
-  security_q VARCHAR2(200) NOT NULL,
+  security_q VARCHAR2(200),
+  security_a VARCHAR2(150),
   isManager CHAR(1) NOT NULL
 );
 
@@ -44,7 +45,7 @@ CREATE SEQUENCE img_id_seq
     START WITH 1
     INCREMENT BY 1
 ;
-
+/
 -- triggers here
 CREATE OR REPLACE TRIGGER emp_seq_trigger
 BEFORE INSERT ON Employee
