@@ -43,6 +43,11 @@ public abstract class User {
 		return isLoggedIn;
 	}
 
+	@Override
+	public String toString() {
+		return "User [id=" + id + ", securityQ=" + securityQ + ", isLoggedIn=" + isLoggedIn + "]";
+	}
+
 	public void setLoggedIn(boolean isLoggedIn) {
 		this.isLoggedIn = isLoggedIn;
 	}

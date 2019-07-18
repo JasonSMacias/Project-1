@@ -5,6 +5,10 @@ public class Employee extends User {
 	public Employee(int userId, String password, String securityQ, String securityA) {
 		// TODO Auto-generated constructor stub
 	}
+	
+	public Employee(String password, String securityQ, String securityA) {
+		// TODO Auto-generated constructor stub
+	}
 
 	@Override
 	public boolean isLoggedIn() {

@@ -51,18 +51,23 @@ public class UserController implements UserDAO {
 			// iterate through results and return 
 			User user = null;
 			while (results.next()) {
+				
 				String password = results.getString("pword");
 				String securityQ = results.getString("security_q");
 				String securityA = results.getString("security_a");
 				String isManager = results.getString("ismanager");
-				if (isManager == "y") {
+				System.out.println(password + " " + securityQ + " " + securityA + " " + isManager);
+				if (isManager.equals("t")) {
+					
 					user = new Manager(userId, password, securityQ, securityA);
+					System.out.println(user.getSecurityQ());
+					
 				}
 				else {
 					user = new Employee(userId, password, securityQ, securityA);
 				}
 				
-				// TODO add getter in User and use that above
+				
 			}
 			return user;
 		}
