@@ -5,6 +5,7 @@ public abstract class User {
 	private String pWord;
 	private String securityQ;
 	private String securityA;
+	private boolean isLoggedIn;
 
 	public int getId() {
 		return id;
@@ -36,6 +37,14 @@ public abstract class User {
 
 	public void setSecurityA(String securityA) {
 		this.securityA = securityA;
+	}
+
+	public boolean isLoggedIn() {
+		return isLoggedIn;
+	}
+
+	public void setLoggedIn(boolean isLoggedIn) {
+		this.isLoggedIn = isLoggedIn;
 	}
 	
 }

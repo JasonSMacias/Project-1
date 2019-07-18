@@ -56,4 +56,16 @@ public class Manager extends User {
 		return "Manager id: " + getId() + "Security Question: " + getSecurityQ();
 	}
 
+	@Override
+	public boolean isLoggedIn() {
+		// TODO Auto-generated method stub
+		return super.isLoggedIn();
+	}
+
+	@Override
+	public void setLoggedIn(boolean isLoggedIn) {
+		// TODO Auto-generated method stub
+		super.setLoggedIn(isLoggedIn);
+	}
+
 }

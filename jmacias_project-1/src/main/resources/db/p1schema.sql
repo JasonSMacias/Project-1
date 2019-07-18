@@ -13,6 +13,7 @@ CREATE TABLE Employee (
 CREATE TABLE ReimbReq (
   req_id INTEGER NOT NULL PRIMARY KEY,
   emp_id INTEGER NOT NULL,
+  resolvedBy INTEGER,
   value NUMBER NOT NULL,
   description VARCHAR2(200),
   date_requested DATE NOT NULL,

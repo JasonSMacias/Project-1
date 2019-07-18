@@ -3,6 +3,18 @@ package beans;
 public class Employee extends User {
 
 	@Override
+	public boolean isLoggedIn() {
+		// TODO Auto-generated method stub
+		return super.isLoggedIn();
+	}
+
+	@Override
+	public void setLoggedIn(boolean isLoggedIn) {
+		// TODO Auto-generated method stub
+		super.setLoggedIn(isLoggedIn);
+	}
+
+	@Override
 	public int getId() {
 		// TODO Auto-generated method stub
 		return super.getId();
