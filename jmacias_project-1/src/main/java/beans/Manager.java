@@ -2,6 +2,10 @@ package beans;
 
 public class Manager extends User {
 
+	public Manager(int userId, String password, String securityQ, String securityA) {
+		// TODO Auto-generated constructor stub
+	}
+
 	@Override
 	public int getId() {
 		// TODO Auto-generated method stub
