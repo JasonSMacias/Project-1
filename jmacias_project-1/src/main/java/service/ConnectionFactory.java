@@ -13,6 +13,14 @@ public class ConnectionFactory {
 	// jdbc: oracle:thin:@hostname:1521:ORCL
 	
 	public static Connection getConnectionUsingProp() throws IOException, SQLException {
+		
+		try {
+            Class.forName("oracle.jdbc.OracleDriver");
+        } catch (ClassNotFoundException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
+		
 		Properties prop = new Properties();
 		prop.load(ConnectionFactory.class.getClassLoader().getResourceAsStream("db.properties"));
 		return DriverManager.getConnection(url, prop);
