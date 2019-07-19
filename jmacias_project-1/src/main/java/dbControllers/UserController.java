@@ -8,33 +8,55 @@ import java.sql.SQLException;
 import java.util.List;
 
 import beans.Employee;
-import beans.Manager;
-import beans.User;
+
 import dataAccessObjects.UserDAO;
 import service.ConnectionFactory;
 
 public class UserController implements UserDAO {
 
+	
+
 	@Override
-	public void logIn(int usrId, String password) {
-		// TODO Auto-generated method stub
-		
+	public Employee createUser(Employee newUser) {
+		// connection
+		try (Connection conn = ConnectionFactory.getConnectionUsingProp()) {
+			// 2. create the statement
+			System.out.println(newUser);
+			String sql = "INSERT INTO Employee(pword, security_q, security_a, ismanager)"
+					+ " VALUES (?, ?, ?, ?)";
+			String[] primaryKeys = {"usr_id"};
+			PreparedStatement stmt = conn.prepareStatement(sql, primaryKeys);
+			stmt.setString(1, newUser.getpWord());
+			stmt.setString(2, newUser.getSecurityQ());
+			stmt.setString(3, newUser.getSecurityA());
+			stmt.setBoolean(4, newUser.isManager());
+			
+			// Execute
+			int rowsAffected = stmt.executeUpdate();
+			System.out.println("Rows inserted: " + rowsAffected);
+			
+			ResultSet resultSet = stmt.getGeneratedKeys();
+			while(resultSet.next()) {
+				newUser.setId(resultSet.getInt(1));
+			}
+			
+			return newUser;
+		}
+		catch (SQLException e) {
+			e.printStackTrace();
+			System.out.println("Something went wrong with creating employee in db.");
+			return null;
+		}
+		catch (IOException e) {
+			e.printStackTrace();
+			System.out.println("Problem with getting prop for connection.");
+			return null;
+		}
+
 	}
 
 	@Override
-	public void logOut(int usrId) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public User createUser(User newUser) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public User getUser(int userId) {
+	public Employee getUser(int userId) {
 		// connection
 		try (Connection conn = ConnectionFactory.getConnectionUsingProp()) {
 			// statement
@@ -49,7 +71,7 @@ public class UserController implements UserDAO {
 			System.out.println(results);
 			
 			// iterate through results and return 
-			User user = null;
+			Employee user = null;
 			while (results.next()) {
 				
 				String password = results.getString("pword");
@@ -59,12 +81,13 @@ public class UserController implements UserDAO {
 				System.out.println(password + " " + securityQ + " " + securityA + " " + isManager);
 				if (isManager.equals("t")) {
 					
-					user = new Manager(userId, password, securityQ, securityA);
+					user = new Employee(password, securityQ, securityA, false);
 					System.out.println(user.getSecurityQ());
 					
 				}
 				else {
-					user = new Employee(userId, password, securityQ, securityA);
+					user = new Employee(password, securityQ, securityA, false);
+					
 				}
 				
 				
@@ -84,15 +107,29 @@ public class UserController implements UserDAO {
 	}
 
 	@Override
-	public List<User> getUsers() {
+	public void logIn(int usrId, String password) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void logOut(int usrId) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public List<Employee> getUsers() {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
-	public User updateUser(User updatedUser) {
+	public Employee updateUser(Employee updatedUser) {
 		// TODO Auto-generated method stub
 		return null;
 	}
+
+	
 
 }

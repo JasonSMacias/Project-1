@@ -1,78 +1,57 @@
 package beans;
 
-public class Employee extends User {
-
-	public Employee(int userId, String password, String securityQ, String securityA) {
-		// TODO Auto-generated constructor stub
+public class Employee {
+	private int id;
+	private String pWord;
+	private String securityQ;
+	private String securityA;
+	private boolean isManager;
+	private boolean isLoggedIn;
+	
+	public Employee(String pWord, String securityQ, String securityA, boolean isManager) {
+		super();
+		this.pWord = pWord;
+		this.securityQ = securityQ;
+		this.securityA = securityA;
+		this.setManager(isManager);
+		this.isLoggedIn = false;
+	}
+	public int getId() {
+		return id;
+	}
+	public void setId(int id) {
+		this.id = id;
+	}
+	public String getpWord() {
+		return pWord;
+	}
+	public void setpWord(String pWord) {
+		this.pWord = pWord;
+	}
+	public String getSecurityQ() {
+		return securityQ;
+	}
+	public void setSecurityQ(String securityQ) {
+		this.securityQ = securityQ;
+	}
+	public String getSecurityA() {
+		return securityA;
+	}
+	public void setSecurityA(String securityA) {
+		this.securityA = securityA;
+	}
+	public boolean isLoggedIn() {
+		return isLoggedIn;
+	}
+	public void setLoggedIn(boolean isLoggedIn) {
+		this.isLoggedIn = isLoggedIn;
+	}
+	public boolean isManager() {
+		return isManager;
+	}
+	public void setManager(boolean isManager) {
+		this.isManager = isManager;
 	}
 	
-	public Employee(String password, String securityQ, String securityA) {
-		// TODO Auto-generated constructor stub
-	}
-
-	@Override
-	public boolean isLoggedIn() {
-		// TODO Auto-generated method stub
-		return super.isLoggedIn();
-	}
-
-	@Override
-	public void setLoggedIn(boolean isLoggedIn) {
-		// TODO Auto-generated method stub
-		super.setLoggedIn(isLoggedIn);
-	}
-
-	@Override
-	public int getId() {
-		// TODO Auto-generated method stub
-		return super.getId();
-	}
-
-	@Override
-	public void setId(int id) {
-		// TODO Auto-generated method stub
-		super.setId(id);
-	}
-
-	@Override
-	public String getpWord() {
-		// TODO Auto-generated method stub
-		return super.getpWord();
-	}
-
-	@Override
-	public void setpWord(String pWord) {
-		// TODO Auto-generated method stub
-		super.setpWord(pWord);
-	}
-
-	@Override
-	public String getSecurityQ() {
-		// TODO Auto-generated method stub
-		return super.getSecurityQ();
-	}
-
-	@Override
-	public void setSecurityQ(String securityQ) {
-		// TODO Auto-generated method stub
-		super.setSecurityQ(securityQ);
-	}
-
-	@Override
-	public String getSecurityA() {
-		// TODO Auto-generated method stub
-		return super.getSecurityA();
-	}
-
-	@Override
-	public void setSecurityA(String securityA) {
-		// TODO Auto-generated method stub
-		super.setSecurityA(securityA);
-	}
-
-	@Override
-	public String toString() {
-		return "Employee id: " + getId() + "Security Question: " + getSecurityQ();
-	}
 	
 }
