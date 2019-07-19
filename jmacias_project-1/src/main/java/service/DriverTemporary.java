@@ -9,8 +9,13 @@ public class DriverTemporary {
 	public static UserDAO uDao = new UserController();
 
 	public static void main(String[] args) {
-		Employee user = uDao.getUser(1);
+		//testing create user
+		Employee user = new Employee("pass2", "Test question2?", "Test answer3", false);
+		uDao.createUser(user);
 		System.out.println(user);
+		
+		// deleting user
+		uDao.removeUser(47);
 
 	}
 

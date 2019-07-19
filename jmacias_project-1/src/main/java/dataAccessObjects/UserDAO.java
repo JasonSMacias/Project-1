@@ -11,4 +11,5 @@ public interface UserDAO {
 	public Employee getUser(int userId);
 	public List<Employee> getUsers();
 	public Employee updateUser(Employee updatedUser);
+	public void removeUser(int userId);
 }

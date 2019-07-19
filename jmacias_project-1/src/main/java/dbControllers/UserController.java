@@ -130,6 +130,35 @@ public class UserController implements UserDAO {
 		return null;
 	}
 
-	
+	@Override
+	public void removeUser(int userId) {
+		// connection
+		try (Connection conn = ConnectionFactory.getConnectionUsingProp()) {
+			//  statement
+			String sql = "DELETE FROM Employee"
+					+ " WHERE usr_id = ?";
+			
+			PreparedStatement stmt = conn.prepareStatement(sql);
+			stmt.setInt(1, userId);
+			
+			
+			// Execute
+			int rowsAffected = stmt.executeUpdate();
+			System.out.println("Car deleted: " + rowsAffected);
+			
+			
+		}
+		catch (SQLException e) {
+			e.printStackTrace();
+			System.out.println("Something went wrong with creating car in db.");
+			
+		}
+		catch (IOException e) {
+			e.printStackTrace();
+			System.out.println("Problem with getting prop for connection.");
+		}
+
+	}
+
 
 }
