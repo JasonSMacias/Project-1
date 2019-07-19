@@ -3,10 +3,15 @@
   <display-name>jmacias_project-1</display-name>
   <welcome-file-list>
     <welcome-file>index.html</welcome-file>
-    <welcome-file>index.htm</welcome-file>
-    <welcome-file>index.jsp</welcome-file>
-    <welcome-file>default.html</welcome-file>
-    <welcome-file>default.htm</welcome-file>
-    <welcome-file>default.jsp</welcome-file>
   </welcome-file-list>
+  <servlet>
+    <description></description>
+    <display-name>Project1Servlet</display-name>
+    <servlet-name>Project1Servlet</servlet-name>
+    <servlet-class>servlets.Project1Servlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>Project1Servlet</servlet-name>
+    <url-pattern>/api/Project1Servlet</url-pattern>
+  </servlet-mapping>
 </web-app>
