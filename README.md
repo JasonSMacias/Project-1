@@ -1,4 +1,4 @@
-# Project-1 - A full stack web application with a Java back-end
+# Project-1 - Full stack web application with a Java back-end
 ## An expense reimbursement system
 -----------
 ### Technologies to be implemented in final project
