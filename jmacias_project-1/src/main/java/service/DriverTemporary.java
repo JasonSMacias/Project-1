@@ -1,25 +1,21 @@
 package service;
 
 
-import beans.Employee;
+import beans.ReimbRequest;
+import dataAccessObjects.ReimbRequestDAO;
 import dataAccessObjects.UserDAO;
+import dbControllers.ReimbRequestController;
 import dbControllers.UserController;
 
 public class DriverTemporary {
 	public static UserDAO uDao = new UserController();
+	public static ReimbRequestDAO rDAO = new ReimbRequestController();
 
 	public static void main(String[] args) {
-		//testing create user
-		Employee user = new Employee("Helen", "pass2", "Test question2?", "Test answer3", true);
-		uDao.createUser(user);
-		System.out.println(user);
 		
-		user.setName("Bertha");
-		uDao.updateUser(user, "name");
-		
-		
-		// deleting user
-//		uDao.removeUser(47);
+		ReimbRequest request = new ReimbRequest();
+		request = rDAO.addNewRequest(3, 99.95, "Food processor");
+		System.out.println("id = " + request.getId());
 
 	}
 
