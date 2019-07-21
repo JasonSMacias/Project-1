@@ -160,11 +160,50 @@ public class UserController implements UserDAO {
 			return null;
 		}
 	}
-
+	
 	@Override
-	public Employee updateUser(Employee updatedUser) {
-		// TODO Auto-generated method stub
-		return null;
+	public void updateUser(Employee updatedUser, String fieldChanged) {
+		// Connection
+		try (Connection conn = ConnectionFactory.getConnectionUsingProp()) {
+			//field to update in sql ternary
+			String sqlField = 
+					fieldChanged == "name" ? "u_name" : 
+					fieldChanged == "pWord" ? "pword" :
+					fieldChanged == "securityQ" ? "security_q" :
+					"security_a";
+			
+			String value = 
+					fieldChanged == "name" ? updatedUser.getName() : 
+					fieldChanged == "pWord" ? updatedUser.getpWord() :
+					fieldChanged == "securityQ" ? updatedUser.getSecurityQ() :
+					updatedUser.getSecurityA();
+					
+					// Statement
+					String sql = "Update Employee "
+							+ "SET " + sqlField + " = ?"
+							+ " Where usr_id = ?";
+			
+			PreparedStatement stmt = conn.prepareStatement(sql);
+			stmt.setString(1, value);
+			stmt.setInt(2, updatedUser.getId());
+			
+			// 3. Execute
+			int rowsAffected = stmt.executeUpdate();
+			System.out.println("Rows insterted: " + rowsAffected);
+			
+			// Maybe this should return the car object?
+			
+		}
+		catch (SQLException e) {
+			e.printStackTrace();
+			System.out.println("Something went wrong with creating car in db.");
+			
+		}
+		catch (IOException e) {
+			e.printStackTrace();
+			System.out.println("Problem with getting prop for connection.");
+		}
+
 	}
 
 	@Override

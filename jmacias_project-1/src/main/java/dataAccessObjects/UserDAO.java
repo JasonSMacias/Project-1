@@ -10,6 +10,6 @@ public interface UserDAO {
 	public Employee createUser(Employee newUser);
 	public Employee getUser(int userId);
 	public List<Employee> getUsers();
-	public Employee updateUser(Employee updatedUser);
+	public void updateUser(Employee updatedUser, String fieldChanged);
 	public void removeUser(int userId);
 }
