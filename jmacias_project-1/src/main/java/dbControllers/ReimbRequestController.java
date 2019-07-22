@@ -26,7 +26,7 @@ public class ReimbRequestController implements ReimbRequestDAO {
 					+ " VALUES (?, ?, ?, ?, ?)";
 			String[] primaryKeys = {"req_id"};
 			PreparedStatement stmt = conn.prepareStatement(sql, primaryKeys);
-			stmt.setInt(1,  employeeId);
+			stmt.setInt(1, employeeId);
 			stmt.setDouble(2, value);
 			stmt.setString(3, description);
 			LocalDate date = LocalDate.now( ZoneId.of( "America/New_York" ) );
@@ -38,7 +38,7 @@ public class ReimbRequestController implements ReimbRequestDAO {
 			int rowsAffected = stmt.executeUpdate();
 			System.out.println("Rows inserted: " + rowsAffected);
 			
-			ReimbRequest savedRequest = new ReimbRequest();
+			ReimbRequest savedRequest = new ReimbRequest(employeeId, value, description, date, "pending");
 			
 			ResultSet resultSet = stmt.getGeneratedKeys();
 			while(resultSet.next()) {
@@ -65,9 +65,46 @@ public class ReimbRequestController implements ReimbRequestDAO {
 	}
 
 	@Override
-	public List<ReimbRequest> viewRequest(int reqId) {
-		// TODO Auto-generated method stub
-		return null;
+	public ReimbRequest viewRequest(int reqId) {
+		// connection
+		try (Connection conn = ConnectionFactory.getConnectionUsingProp()) {
+			// statement
+			String sql = "SELECT emp_id, value, description, date_requested, status"
+					+ " FROM ReimbReq"
+					+ " Where req_id = ?";
+			PreparedStatement stmt = conn.prepareStatement(sql);
+			stmt.setInt(1, reqId);
+			
+			// execute query
+			ResultSet results = stmt.executeQuery();
+			
+			
+			// iterate through results and return 
+			ReimbRequest request = null;
+			while (results.next()) {
+				
+				int empId = results.getInt("emp_id");
+				double value = results.getDouble("value");
+				String description = results.getString("description");
+				Date sqlDate = results.getDate("date_requested");
+				LocalDate date = ((java.sql.Date) sqlDate).toLocalDate();
+				String status = results.getString("status");
+					
+				request = new ReimbRequest(reqId, empId, value, description, date, status);
+	
+			}
+			return request;
+		}
+		catch (SQLException e) {
+			e.printStackTrace();
+			System.out.println("Something went wrong with retrieving the user from the db.");
+			return null;
+		}
+		catch(IOException e) {
+			e.printStackTrace();
+			System.out.println("Problem with getting prop for connection.");
+			return null;
+		}
 	}
 
 	@Override

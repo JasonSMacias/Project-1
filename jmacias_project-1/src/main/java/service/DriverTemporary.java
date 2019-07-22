@@ -13,9 +13,8 @@ public class DriverTemporary {
 
 	public static void main(String[] args) {
 		
-		ReimbRequest request = new ReimbRequest();
-		request = rDAO.addNewRequest(3, 99.95, "Food processor");
-		System.out.println("id = " + request.getId());
+		ReimbRequest request = rDAO.viewRequest(2);
+		System.out.println("id = " + request.getId() + " description = " + request.getDescription());
 
 	}
 

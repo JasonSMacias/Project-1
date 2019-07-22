@@ -8,7 +8,7 @@ public interface ReimbRequestDAO {
 	// add new reimbursement request, return string confirmation
 	public ReimbRequest addNewRequest(int employeeId, double value, String description);
 	public ReimbRequest addNewRequest(int employeeId, double value, String description, String image);
-	public List<ReimbRequest> viewRequest(int reqId);
+	public ReimbRequest viewRequest(int reqId);
 	public List<ReimbRequest> viewRequestsByEmployee(int empId);
 	public List<ReimbRequest> viewRequestsByEmployee(int empId, String status); // by status
 	public List<ReimbRequest> viewRequests(); // all

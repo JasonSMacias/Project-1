@@ -1,24 +1,46 @@
 package beans;
 
+import java.time.LocalDate;
+
 public class ReimbRequest {
 	private int id;
-	private String empId;
+	private int empId;
 	private double value;
 	private String description;
-	private String date;
+	private LocalDate date;
 	private String status;
 	private String imgFile;
 	
+	public ReimbRequest(int id, int empId, double value, String description, LocalDate date, String status) {
+		super();
+		this.id = id;
+		this.empId = empId;
+		this.value = value;
+		this.description = description;
+		this.date = date;
+		this.status = status;
+	}
+	public ReimbRequest(int empId, double value, String description, LocalDate date, String status) {
+		super();
+		this.empId = empId;
+		this.value = value;
+		this.description = description;
+		this.date = date;
+		this.status = status;
+	}
+	public ReimbRequest() {
+		super();
+	}
 	public int getId() {
 		return id;
 	}
 	public void setId(int id) {
 		this.id = id;
 	}
-	public String getEmpId() {
+	public int getEmpId() {
 		return empId;
 	}
-	public void setEmpId(String empId) {
+	public void setEmpId(int empId) {
 		this.empId = empId;
 	}
 	public double getValue() {
@@ -33,10 +55,10 @@ public class ReimbRequest {
 	public void setDescription(String description) {
 		this.description = description;
 	}
-	public String getDate() {
+	public LocalDate getDate() {
 		return date;
 	}
-	public void setDate(String date) {
+	public void setDate(LocalDate date) {
 		this.date = date;
 	}
 	public String getStatus() {
