@@ -5,8 +5,10 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.time.LocalDate;
 import java.time.ZoneId;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -97,7 +99,7 @@ public class ReimbRequestController implements ReimbRequestDAO {
 		}
 		catch (SQLException e) {
 			e.printStackTrace();
-			System.out.println("Something went wrong with retrieving the user from the db.");
+			System.out.println("Something went wrong with retrieving the request from the db.");
 			return null;
 		}
 		catch(IOException e) {
@@ -109,26 +111,166 @@ public class ReimbRequestController implements ReimbRequestDAO {
 
 	@Override
 	public List<ReimbRequest> viewRequestsByEmployee(int empId) {
-		// TODO Auto-generated method stub
-		return null;
+		// connection
+		try (Connection conn = ConnectionFactory.getConnectionUsingProp()) {
+			// statement
+			String sql = "SELECT req_id, emp_id, value, description, date_requested, status"
+					+ " FROM ReimbReq";
+			Statement stmt = conn.createStatement();
+			// execute query
+			ResultSet results = stmt.executeQuery(sql);
+			System.out.println(results);
+			
+			// iterate through results and return 
+			List<ReimbRequest> requests = new ArrayList<>();
+			while (results.next()) {
+				int reqId = results.getInt("req_id");
+				double value = results.getDouble("value");
+				String description = results.getString("description");
+				Date sqlDate = results.getDate("date_requested");
+				LocalDate date = ((java.sql.Date) sqlDate).toLocalDate();
+				String status = results.getString("status");
+				ReimbRequest request = new ReimbRequest(reqId, empId, value, description, date, status);
+				if (empId == results.getInt("emp_id")) {
+					requests.add(request);
+				}
+			}
+			
+			return requests;
+		}
+		catch (SQLException e) {
+			e.printStackTrace();
+			System.out.println("Something went wrong with retrieving the requests from the db.");
+			return null;
+		}
+		catch(IOException e) {
+			e.printStackTrace();
+			System.out.println("Problem with getting prop for connection.");
+			return null;
+		}
 	}
 
 	@Override
 	public List<ReimbRequest> viewRequestsByEmployee(int empId, String status) {
-		// TODO Auto-generated method stub
-		return null;
+		// connection
+		try (Connection conn = ConnectionFactory.getConnectionUsingProp()) {
+			// statement
+			String sql = "SELECT req_id, emp_id, value, description, date_requested, status"
+					+ " FROM ReimbReq";
+			Statement stmt = conn.createStatement();
+			// execute query
+			ResultSet results = stmt.executeQuery(sql);
+			System.out.println(results);
+			
+			// iterate through results and return 
+			List<ReimbRequest> requests = new ArrayList<>();
+			while (results.next()) {
+				int reqId = results.getInt("req_id");
+				double value = results.getDouble("value");
+				String description = results.getString("description");
+				Date sqlDate = results.getDate("date_requested");
+				LocalDate date = ((java.sql.Date) sqlDate).toLocalDate();
+				String status2 = results.getString("status");
+				ReimbRequest request = new ReimbRequest(reqId, empId, value, description, date, status2);
+				if (empId == results.getInt("emp_id") && status.equals(status2)) {
+					requests.add(request);
+				}
+			}
+			
+			return requests;
+		}
+		catch (SQLException e) {
+			e.printStackTrace();
+			System.out.println("Something went wrong with retrieving the requests from the db.");
+			return null;
+		}
+		catch(IOException e) {
+			e.printStackTrace();
+			System.out.println("Problem with getting prop for connection.");
+			return null;
+		}
 	}
 
 	@Override
 	public List<ReimbRequest> viewRequests() {
-		// TODO Auto-generated method stub
-		return null;
+		// connection
+		try (Connection conn = ConnectionFactory.getConnectionUsingProp()) {
+			// statement
+			String sql = "SELECT req_id, emp_id, value, description, date_requested, status"
+					+ " FROM ReimbReq";
+			Statement stmt = conn.createStatement();
+			// execute query
+			ResultSet results = stmt.executeQuery(sql);
+			System.out.println(results);
+			
+			// iterate through results and return 
+			List<ReimbRequest> requests = new ArrayList<>();
+			while (results.next()) {
+				int reqId = results.getInt("req_id");
+				int empId = results.getInt("emp_id");
+				double value = results.getDouble("value");
+				String description = results.getString("description");
+				Date sqlDate = results.getDate("date_requested");
+				LocalDate date = ((java.sql.Date) sqlDate).toLocalDate();
+				String status = results.getString("status");
+				ReimbRequest request = new ReimbRequest(reqId, empId, value, description, date, status);
+				requests.add(request);
+			}
+			
+			return requests;
+		}
+		catch (SQLException e) {
+			e.printStackTrace();
+			System.out.println("Something went wrong with retrieving the requests from the db.");
+			return null;
+		}
+		catch(IOException e) {
+			e.printStackTrace();
+			System.out.println("Problem with getting prop for connection.");
+			return null;
+		}
 	}
 
 	@Override
 	public List<ReimbRequest> viewRequests(String status) {
-		// TODO Auto-generated method stub
-		return null;
+		// connection
+		try (Connection conn = ConnectionFactory.getConnectionUsingProp()) {
+			// statement
+			String sql = "SELECT req_id, emp_id, value, description, date_requested, status"
+					+ " FROM ReimbReq";
+			Statement stmt = conn.createStatement();
+			// execute query
+			ResultSet results = stmt.executeQuery(sql);
+			System.out.println(results);
+			
+			// iterate through results and return 
+			List<ReimbRequest> requests = new ArrayList<>();
+			while (results.next()) {
+				int reqId = results.getInt("req_id");
+				int empId = results.getInt("emp_id");
+				double value = results.getDouble("value");
+				String description = results.getString("description");
+				Date sqlDate = results.getDate("date_requested");
+				LocalDate date = ((java.sql.Date) sqlDate).toLocalDate();
+				String status2 = results.getString("status");
+				ReimbRequest request = new ReimbRequest(reqId, empId, value, description, date, status);
+				if (status.equals(status2)) {
+					requests.add(request);
+				}				
+			}
+			
+			return requests;
+		}
+		catch (SQLException e) {
+			e.printStackTrace();
+			System.out.println("Something went wrong with retrieving the requests from the db.");
+			return null;
+		}
+		catch(IOException e) {
+			e.printStackTrace();
+			System.out.println("Problem with getting prop for connection.");
+			return null;
+		}
 	}
 
 	@Override
