@@ -13,6 +13,6 @@ public interface ReimbRequestDAO {
 	public List<ReimbRequest> viewRequestsByEmployee(int empId, String status); // by status
 	public List<ReimbRequest> viewRequests(); // all
 	public List<ReimbRequest> viewRequests(String status); // all by status
-	public ReimbRequest resolvePending(int reimbId, int resolvedBy);
+	public void resolvePending(int reimbId, int resolvedBy);
 	public String addImage(int reimbId, String imageInfo);
 }

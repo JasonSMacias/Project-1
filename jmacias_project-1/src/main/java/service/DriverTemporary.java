@@ -22,6 +22,10 @@ public class DriverTemporary {
 		for (ReimbRequest x : reqList) {
 			System.out.println(x.getDescription());
 		}
+		int tempId = reqList.get(0).getId();
+		rDAO.resolvePending(tempId, reqList.get(0).getEmpId());
+		ReimbRequest changed = rDAO.viewRequest(tempId);
+		System.out.println("new status: " + changed.getStatus());
 
 	}
 

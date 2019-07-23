@@ -274,9 +274,34 @@ public class ReimbRequestController implements ReimbRequestDAO {
 	}
 
 	@Override
-	public ReimbRequest resolvePending(int reimbId, int resolvedBy) {
-		// TODO Auto-generated method stub
-		return null;
+	public void resolvePending(int reimbId, int resolvedBy) {
+		// Connection
+		try (Connection conn = ConnectionFactory.getConnectionUsingProp()) {
+					
+					// Statement
+					String sql = "Update Reimbreq "
+							+ "SET status = 'resolved', resolvedby = ?"
+							+ " Where req_id = ?";
+			
+			PreparedStatement stmt = conn.prepareStatement(sql);
+			stmt.setInt(1, resolvedBy);
+			stmt.setInt(2, reimbId);
+			
+			// 3. Execute
+			int rowsAffected = stmt.executeUpdate();
+			System.out.println("Rows insterted: " + rowsAffected);
+			
+			
+		}
+		catch (SQLException e) {
+			e.printStackTrace();
+			System.out.println("Something went wrong with updating db.");
+			
+		}
+		catch (IOException e) {
+			e.printStackTrace();
+			System.out.println("Problem with getting prop for connection.");
+		}
 	}
 
 	@Override

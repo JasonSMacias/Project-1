@@ -10,6 +10,7 @@ public class ReimbRequest {
 	private LocalDate date;
 	private String status;
 	private String imgFile;
+	private String resolvedBy;
 	
 	public ReimbRequest(int id, int empId, double value, String description, LocalDate date, String status) {
 		super();
@@ -72,6 +73,12 @@ public class ReimbRequest {
 	}
 	public void setImgFile(String imgFile) {
 		this.imgFile = imgFile;
+	}
+	public String getResolvedBy() {
+		return resolvedBy;
+	}
+	public void setResolvedBy(String resolvedBy) {
+		this.resolvedBy = resolvedBy;
 	}
 	
 	
