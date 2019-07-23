@@ -41,8 +41,15 @@ public class Project1Servlet extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		doGet(request, response);
+		String password = request.getParameter("password");
+		String userName = request.getParameter("name");
+		Employee user = uDao.getUserByName(userName);
+		if (password.equals(user.getpWord())) {
+			response.getWriter().append("Sign in was successful!");
+		}
+		else {
+			response.getWriter().append("Sign in was not successful!");
+		}
 	}
 
 }

@@ -110,6 +110,58 @@ public class UserController implements UserDAO {
 	}
 
 	@Override
+	public Employee getUserByName(String userName) {
+		// connection
+		try (Connection conn = ConnectionFactory.getConnectionUsingProp()) {
+			// statement
+			String sql = "SELECT usr_id, pword, security_q, security_a, ismanager"
+					+ " FROM Employee"
+					+ " Where u_name = ?";
+			PreparedStatement stmt = conn.prepareStatement(sql);
+			stmt.setString(1, userName);
+			
+			// execute query
+			ResultSet results = stmt.executeQuery();
+			System.out.println(results);
+			
+			// iterate through results and return 
+			Employee user = null;
+			while (results.next()) {
+				
+				int uId = results.getInt("usr_id");
+				String password = results.getString("pword");
+				String securityQ = results.getString("security_q");
+				String securityA = results.getString("security_a");
+				String isManager = results.getString("ismanager");
+				System.out.println(userName + " " + " " + password + " " + securityQ + " " + securityA + " " + isManager);
+				if (isManager.equals("t")) {
+					
+					user = new Employee(uId, userName, password, securityQ, securityA, true);
+					System.out.println(user.getSecurityQ());
+					
+				}
+				else {
+					user = new Employee(uId, userName, password, securityQ, securityA, false);
+					
+				}
+				
+				
+			}
+			return user;
+		}
+		catch (SQLException e) {
+			e.printStackTrace();
+			System.out.println("Something went wrong with retrieving the user from the db.");
+			return null;
+		}
+		catch(IOException e) {
+			e.printStackTrace();
+			System.out.println("Problem with getting prop for connection.");
+			return null;
+		}
+	}
+	
+	@Override
 	public void logIn(int usrId, String password) {
 		// TODO Auto-generated method stub
 		
