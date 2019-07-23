@@ -274,7 +274,7 @@ public class ReimbRequestController implements ReimbRequestDAO {
 	}
 
 	@Override
-	public ReimbRequest resolvePending(int reimbId) {
+	public ReimbRequest resolvePending(int reimbId, int resolvedBy) {
 		// TODO Auto-generated method stub
 		return null;
 	}

@@ -1,6 +1,8 @@
 package service;
 
 
+import java.util.List;
+
 import beans.ReimbRequest;
 import dataAccessObjects.ReimbRequestDAO;
 import dataAccessObjects.UserDAO;
@@ -13,8 +15,13 @@ public class DriverTemporary {
 
 	public static void main(String[] args) {
 		
-		ReimbRequest request = rDAO.viewRequest(2);
-		System.out.println("id = " + request.getId() + " description = " + request.getDescription());
+		
+		List<ReimbRequest> reqList = rDAO.viewRequests();
+		int arrSize = reqList.size();
+		System.out.println("Array size: " + arrSize);
+		for (ReimbRequest x : reqList) {
+			System.out.println(x.getDescription());
+		}
 
 	}
 
