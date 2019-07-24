@@ -6,6 +6,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import beans.Employee;
 import dataAccessObjects.UserDAO;
@@ -68,17 +69,23 @@ public class Project1Servlet extends HttpServlet {
 				option = vals[i];
 			}
 		}
-		Employee user = uDao.getUserByName(userName);
-		if (option.equals("signup")) {
+		
+		if (option.equals("signup")) {		
 			response.getWriter().append("Sorry, signUp has not been implemented yet");
-			System.out.println("signup");
-		}
-		else if (password.equals(user.getpWord())) {
-			response.getWriter().append("Sign in was successful!");
-			System.out.println("Success");
 		}
 		else {
-			response.getWriter().append("Sign in was not successful!");
+			Employee user = uDao.getUserByName(userName);
+			if (password.equals(user.getpWord())) {
+				response.getWriter().append("Sign in was successful!");
+				HttpSession session = request.getSession();
+				session.setAttribute("uName", user.getName());
+				session.setAttribute("isLoggedIn", "true");
+				session.setAttribute("id", user.getId());
+//			forward to page depending on option
+			} else {
+				response.getWriter().append("Sign in was not successful, please try again");
+
+			}
 		}
 	}
 

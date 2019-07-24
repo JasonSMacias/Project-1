@@ -18,6 +18,9 @@ public class Employee {
 		this.setManager(isManager);
 		this.isLoggedIn = false;
 	}
+	public Employee() {
+		super();
+	}
 	public Employee(int id, String name, String pWord, String securityQ, String securityA, boolean isManager) {
 		super();
 		this.id = id;
