@@ -26,10 +26,6 @@
       <div class="column is-4">
         <div class="box has-text-centered has-background-white-ter">
       
-            <!-- <p>
-              <h2>This is a link to a servlet get request</h2>
-              <a href="/jmacias_project-1/api/Project1Servlet">Get Request</a>
-            </p> -->
           <div class="level">
           
             <div class="level-left">
@@ -46,8 +42,6 @@
             </div>
          
           </div>
-  
-
         </div>
       </div>
     </div>
@@ -58,21 +52,37 @@
     <div class="modal-background closer"></div>
     <div class="modal-card">
       <header class="modal-card-head">
-        <p class="modal-card-title" id="modal-title">
+        <p class="modal-card-title bitter" id="modal-title">
           <!-- content of model title to be inserted here from js -->
         </p>
         <button class="delete" aria-label="close"></button>
       </header>
-      <section id="modal-content" class="modal-card-body">
-        <!-- Content of modal insterted from js here -->
-      </section>
+      <div class="modal-card-body">
+        <form>
+	        <div id="modal-content">
+		        <!-- Content of modal inserted from JS here --> 
+            <div class="field">
+              <div class="control">
+                <input class="label" placeholder="User Name" id="name-input" type="text" />
+              </div>
+            </div>
+            <div class="field">
+              <div class="control">
+                <input class="label" placeholder="Password" id="pw-input" type="password" />	
+              </div>
+            </div>
+	        </div>
+	        <br />
+	        <input id="form-submit" type="submit" class="button button-small is-success">
+        </form>
+      </div>
       <footer class="modal-card-foot">
         <button class="button is-success">Okay</button>
         <button class="button closer">Cancel</button>
       </footer>
     </div>
   </div>
-
+  
   <script type="text/javascript" src="assets/logic.js"></script>
 </body>
 
