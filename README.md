@@ -1,5 +1,6 @@
 # Project-1 - Full stack web application with a Java back-end
 ## An expense reimbursement system
+![Sign in Screenshot](./jmacias_project-1/src/main/webapp/assets/images/signup-screenshot.PNG)
 -----------
 ### Technologies to be implemented in final project
 - Java 1.8
