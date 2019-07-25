@@ -82,7 +82,7 @@ public class UserController implements UserDAO {
 				String securityA = results.getString("security_a");
 				String isManager = results.getString("ismanager");
 				System.out.println(uName + " " + password + " " + securityQ + " " + securityA + " " + isManager);
-				if (isManager.equals("t")) {
+				if (isManager.equals("1")) {
 					
 					user = new Employee(uName, password, securityQ, securityA, true);
 					System.out.println(user.getSecurityQ());
