@@ -10,32 +10,129 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.8.2/css/all.min.css">
   <link href="https://fonts.googleapis.com/css?family=Bitter|Roboto&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="assets/style.css">
+  <link rel="stylesheet" href="assets/employee.css">
 </head>
 
 <body>
-  <h1>Expense Reimbursement - Employee Page</h1>
 
+  <section class="section">
+    <div class="columns">
+      <div class="column is-6 is-offset-1">
+
+        <div class="box has-text-centered has-background-white-ter">
+          <h1 class="is-size-3">Expense Reimbursement - Employee</h1>
+        </div>
+
+
+      </div>
+      <div class="column is-4">
+        <div class="box has-text-centered has-background-white-ter">
+
+          <div class="level">
+
+            <div class="level-left">
+              <div class="level-item">
+                <button id="logout-button" class="button is-success is-medium">Log Out &nbsp<span class="icon">
+                    <i class="fas fa-sign-in-alt"></i>
+                  </span></button>
+              </div>
+            </div>
+            <div class="level-right">
+              <div class="level-item">
+                <button id="submit-button" class="button is-success is-medium">Submit &nbsp<span class="icon"><i
+                      class="fas fa-user-plus"></i></span></button>
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </section>
+
+  <section class="section">
+    <h1 class="is-size-2 has-text-centered">Please create your user account</h1>
+    <br>
+    <div class="columns">
+      <div class="column is-narrow is-offset-1">
+
+        <div class="box has-background-white-ter">
+          <div class="field">
+            <div class="control">
+              <input class="label" placeholder="User Name" id="name-input" type="text" />
+            </div>
+          </div>
+          <div class="field">
+            <div class="control">
+              <input class="label" placeholder="Password" id="pw-input" type="password" />
+            </div>
+          </div>
+          <div class="field">
+            <div class="control">
+              <input class="label" placeholder="Confirm Password" id="pw2-input" type="password" />
+            </div>
+          </div>
+          <!-- radio buttons for role -->
+          <div class="field">
+            <div class="control">
+              <input class="label" placeholder="Security Question" id="securityq-input" type="password" />
+            </div>
+          </div>
+          <div class="field">
+            <div class="control">
+              <input class="label" placeholder="Security Answer" id="securitya-input" type="password" />
+            </div>
+          </div>
+        </div>
+
+
+      </div>
+      <div class="column">
+        <div class="box shadowed is-size-5 has-background-white-ter">
+          <div>
+            <!-- form filled out onchange here, draggable -->
+            <br>
+            <span class="bitter">Name: &nbsp</span><span class="has-text-right" id="name-target"></span><br>
+            <span class="bitter">Role: &nbsp</span><span class="has-text-right" id="role-target"></span><br>
+            <span class="bitter">Security Question: &nbsp</span><span class="has-text-right" id="securityq-target"></span><br>
+            <span class="bitter">Security answer: &nbsp</span><span class="has-text-right" id="securitya-target"></span>
+            <br><br>
+          </div>
+        </div>
+      </div>
+      <div class="column is-2">
+        <div class="box has-text-centered has-background-success has-text-light">
+          <i class="far fa-paper-plane fa-9x"></i>
+        </div>
+      </div>
+      <div class="column is-1"></div>
+    </div>
+
+  </section>
 
   <div id="modal" class="modal">
-    <div class="modal-background"></div>
+    <div class="modal-background closer"></div>
     <div class="modal-card">
       <header class="modal-card-head">
-        <p class="modal-card-title" id="modal-title">
+        <p class="modal-card-title bitter" id="modal-title">
           <!-- content of model title to be inserted here from js -->
         </p>
         <button class="delete" aria-label="close"></button>
       </header>
-      <section id="modal-content" class="modal-card-body">
-        <!-- Content of modal insterted from js here -->
-      </section>
-      <footer class="modal-card-foot">
-        <button class="button is-success">Okay</button>
-        <button class="button">Cancel</button>
-      </footer>
+      <div class="modal-card-body">
+        <form>
+          <div id="modal-content">
+            <!-- Content of modal inserted from JS here -->
+
+          </div>
+        </form>
+      </div>
+
     </div>
   </div>
 
-  <script type="text/javascript" src="assets/employee.js"></script>
+  <script type="text/javascript" src="assets/signup.js"></script>
 </body>
 
 </html>
