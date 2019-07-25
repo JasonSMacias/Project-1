@@ -83,8 +83,8 @@ public class Project1Servlet extends HttpServlet {
 				session.setAttribute("id", user.getId());
 //			forward to page depending on option
 			} else {
-				response.getWriter().append("Sign in was not successful, please try again");
-
+//				response.getRequestDispatcher("/../../jmacias_project-1/");
+				response.getWriter().append("failed");
 			}
 		}
 	}

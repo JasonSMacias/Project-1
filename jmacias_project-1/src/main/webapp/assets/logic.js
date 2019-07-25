@@ -39,7 +39,13 @@ formSubmit.addEventListener("click", function(e){
   console.log("clicked");
   xhr.onreadystatechange = function() {
     if (this.readyState == 4 && this.status == 200) {
-    	console.log(xhr.responseText);
+      if (xhr.responseText === "failed") {
+        alert("sorry, your login was unsuccessful");
+        window.location.href = "http://localhost:8080/jmacias_project-1/";
+      }
+      else {
+        console.log("okay");
+      }
     }
   }
   xhr.open("POST", "http://localhost:8080/jmacias_project-1/api/Project1Servlet");
