@@ -72,6 +72,12 @@ public class Project1Servlet extends HttpServlet {
 			String role = newEmployee.isManager() == true ? "manager" : "employee";
 			response.getWriter().append(role);
 			break;
+		case "getuser":
+			HttpSession session2 = request.getSession(false);
+			String usr = (String) session2.getAttribute("uName");
+			System.out.println(usr);
+			response.getWriter().append(usr);
+			break;
 		}
 //		response.getWriter().append("Served at: ").append(request.getContextPath());
 //		response.getWriter().append("\nEmployees: \n");

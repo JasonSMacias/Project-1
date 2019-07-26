@@ -57,53 +57,82 @@
     <div class="columns">
       <div class="column is-narrow is-offset-1">
 
-        <div class="box has-background-white-ter">
-          <div class="field">
-            <div class="control">
-              <input class="label" placeholder="User Name" id="name-input" type="text" />
-            </div>
-          </div>
-          <div class="field">
-            <div class="control">
-              <input class="label" placeholder="Password" id="pw-input" type="password" />
-            </div>
-          </div>
-          <div class="field">
-            <div class="control">
-              <input class="label" placeholder="Confirm Password" id="pw2-input" type="password" />
-            </div>
-          </div>
-          <!-- radio buttons for role -->
-          <div class="field">
-            <div class="control">
-              <input class="label" placeholder="Security Question" id="securityq-input" type="text" />
-            </div>
-          </div>
-          <div class="field">
-            <div class="control">
-              <input class="label" placeholder="Security Answer" id="securitya-input" type="text" />
-            </div>
-          </div>
-        </div>
-
+        <nav class="panel has-background-white-ter">
+          <p class="panel-heading bitter">
+            Options
+          </p>
+          <a id="submit-request" class="panel-block">
+            <span class="panel-icon">
+              <i class="fas fa-folder-plus"></i>
+            </span>
+            submit a request
+          </a>
+          <a id="upload-receipt" class="panel-block">
+            <span class="panel-icon">
+              <i class="fas fa-file-upload"></i>
+            </span>
+            upload a receipt
+          </a>
+          <a id="view-pending" class="panel-block">
+            <span class="panel-icon">
+              <i class="fas fa-folder-open"></i>
+            </span>
+            view pending requests
+          </a>
+          <a id="view-resolved" class="panel-block">
+            <span class="panel-icon">
+              <i class="fas fa-folder-open"></i>
+            </span>
+            view resolved requests
+          </a>
+          <a id="view-info" class="panel-block">
+            <span class="panel-icon">
+              <i class="fas fa-eye"></i>
+            </span>
+            view your information
+          </a>
+          <a id="update-info" class="panel-block">
+            <span class="panel-icon">
+              <i class="fas fa-edit"></i>
+            </span>
+            update your information
+          </a>
+        </nav>
 
       </div>
       <div class="column">
         <div class="box shadowed is-size-5 has-background-white-ter">
-          <div>
-            <!-- form filled out onchange here, draggable -->
+          <div id="main-box">
+
             <br>
-            <span class="bitter">Name: &nbsp</span><span class="has-text-right" id="name-target"></span><br>
-            <span class="bitter">Role: &nbsp</span><span class="has-text-right" id="role-target"></span><br>
-            <span class="bitter">Security Question: &nbsp</span><span class="has-text-right" id="securityq-target"></span><br>
-            <span class="bitter">Security answer: &nbsp</span><span class="has-text-right" id="securitya-target"></span>
-            <br><br>
+            <span class="bitter hideable">Please select an option</span><br>
+            <div class="hideable" style="display: none" id="hidden-submit-request" >
+              <h2>Enter your request information</h2>
+              <form>
+                <div class="field">
+                  <div class="control">
+                    <input class="label" placeholder="Value" id="value-input" type="number" />
+                  </div>
+                </div>
+                <div class="field">
+                  <div class="control">
+                    <input class="label" placeholder="Description" id="description-input" type="text" />
+                  </div>
+                </div>
+                <div class="field">
+                  <div class="control">
+                    <input class="label" placeholder="Date" id="date-input" type="date" />
+                  </div>
+                </div>
+                
+              </form>
+            </div>
           </div>
         </div>
       </div>
       <div class="column is-2">
         <div class="box has-text-centered has-background-success has-text-light">
-          <i class="far fa-paper-plane fa-9x"></i>
+          <i class="far fa-paper-plane fa-10x"></i>
         </div>
       </div>
       <div class="column is-1"></div>
@@ -132,7 +161,7 @@
     </div>
   </div>
 
-  <script type="text/javascript" src="../assets/signup.js"></script>
+  <script type="text/javascript" src="../assets/employee.js"></script>
 </body>
 
 </html>
