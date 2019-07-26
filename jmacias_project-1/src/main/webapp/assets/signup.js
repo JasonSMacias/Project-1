@@ -36,6 +36,7 @@ function updateName(e) {
   getRadioVal();
 }
 let hasSubmitted = false;
+
 function submitRequest() {
   if (hasSubmitted) {
     confirmSubmit2()
@@ -53,6 +54,10 @@ function dragOver(e) {
 function confirmSubmit(e) {
   e.preventDefault();
   alert("confirmed");
+}
+
+function drag(e) {
+
 }
 
 function confirmSubmit2() {

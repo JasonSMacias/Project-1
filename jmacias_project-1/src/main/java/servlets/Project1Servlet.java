@@ -90,6 +90,13 @@ public class Project1Servlet extends HttpServlet {
 			String jsonString = mapper.writeValueAsString(requestList.get(0));
 			response.getWriter().append(jsonString);
 			break;
+		case "logout":
+			HttpSession session4 = request.getSession(false);
+			if (session4 != null) {
+			    session4.invalidate();
+			}
+
+			break;
 		}
 //		response.getWriter().append("Served at: ").append(request.getContextPath());
 //		response.getWriter().append("\nEmployees: \n");

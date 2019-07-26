@@ -14,6 +14,7 @@ const descriptionInput = document.querySelector("#description-input");
 const dateInput = document.querySelector("#date-input");
 const mainBox = document.querySelector("#main-box");
 const requestDisplay = document.querySelector("#request-display");
+const logoutButtonHTM = document.querySelector("#logout-button");
 
 
 const xhr = new XMLHttpRequest();
@@ -63,12 +64,12 @@ function submitRequestFinal(e) {
   // console.log("request object" + JSON.stringify(rRequestObject));
   console.log(`value: ${value} - description: ${description} - date: ${date}`);
   const xhr2 = new XMLHttpRequest();
-  
+
   xhr2.onreadystatechange = function () {
     if (this.readyState == 4 && this.status == 200) {
 
       if (xhr.responseText) {
-        
+
       }
       else {
         console.log("hmmm . . .");
@@ -84,14 +85,14 @@ function uploadReceipt() {
 
 }
 function viewPending() {
-    console.log("viewPending ran");
+  console.log("viewPending ran");
   for (let x of hideableNList) {
     x.setAttribute("style", "display: none");
   }
   requestDisplay.setAttribute("style", "");
 
- const xhr3 = new XMLHttpRequest();
-  
+  const xhr3 = new XMLHttpRequest();
+
   xhr3.onreadystatechange = function () {
     if (this.readyState == 4 && this.status == 200) {
 
@@ -106,8 +107,25 @@ function viewPending() {
   }
   xhr.open("GET", "http://localhost:8080/jmacias_project-1/api/Project1Servlet?option=displaypending");
   xhr.send();
-  
 
+}
+
+function logOut() {
+  const xhr4 = new XMLHttpRequest();
+
+  xhr4.onreadystatechange = function () {
+    if (this.readyState == 4 && this.status == 200) {
+
+      if (xhr4.responseText) {
+        
+      }
+      else {
+        console.log("hmmm . . .");
+      }
+    }
+  }
+  xhr.open("GET", "http://localhost:8080/jmacias_project-1/api/Project1Servlet?option=logout");
+  xhr.send();
 }
 
 submitRequestHTM.addEventListener("click", activatePanel);
@@ -125,3 +143,5 @@ viewInfoHTM.addEventListener("click", activatePanel);
 updateInfoHTM.addEventListener("click", activatePanel);
 
 requestSubmit.addEventListener("click", submitRequestFinal);
+
+logoutButtonHTM.addEventListener("click", logOut);
