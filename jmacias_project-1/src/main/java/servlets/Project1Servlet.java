@@ -12,11 +12,15 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
+
 import beans.Employee;
+import beans.ReimbRequest;
+import dataAccessObjects.ReimbRequestDAO;
 import dataAccessObjects.UserDAO;
+import dbControllers.ReimbRequestController;
 import dbControllers.UserController;
 import service.SignupService;
-
 
 /**
  * Servlet implementation class Project1Servlet
@@ -24,36 +28,36 @@ import service.SignupService;
 public class Project1Servlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	private static UserDAO uDao = new UserController();
-
-    /**
-     * Default constructor. 
-     */
-    public Project1Servlet() {
-        // TODO Auto-generated constructor stub
-    }
+	private static ReimbRequestDAO rDao = new ReimbRequestController();
 
 	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
+	 * Default constructor.
 	 */
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
+	public Project1Servlet() {
+		// TODO Auto-generated constructor stub
+	}
+
+	/**
+	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse
+	 *      response)
+	 */
+	protected void doGet(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+
 		String option = request.getParameter("option");
 		System.out.println(option);
 		switch (option) {
 		case "signup":
 			System.out.println("switch working");
-			RequestDispatcher dispatcher = getServletContext()
-				      .getRequestDispatcher("/signupxyz.html");
+			RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/signupxyz.html");
 			dispatcher.forward(request, response);
 			break;
 		case "employee":
-			RequestDispatcher dispatcher2 = getServletContext()
-		      	.getRequestDispatcher("/employeexyz.html");
-				dispatcher2.forward(request, response);
+			RequestDispatcher dispatcher2 = getServletContext().getRequestDispatcher("/employeexyz.html");
+			dispatcher2.forward(request, response);
 			break;
 		case "manager":
-			RequestDispatcher dispatcher3 = getServletContext()
-	      	.getRequestDispatcher("/managerxyz.html");
+			RequestDispatcher dispatcher3 = getServletContext().getRequestDispatcher("/managerxyz.html");
 			dispatcher3.forward(request, response);
 			break;
 		case "createuser":
@@ -78,6 +82,14 @@ public class Project1Servlet extends HttpServlet {
 			System.out.println(usr);
 			response.getWriter().append(usr);
 			break;
+		case "displaypending":
+			HttpSession session3 = request.getSession(false);
+			int id = (int) session3.getAttribute("id");
+			List<ReimbRequest> requestList = rDao.viewRequestsByEmployee(id, "pending");
+			ObjectMapper mapper = new ObjectMapper();
+			String jsonString = mapper.writeValueAsString(requestList.get(0));
+			response.getWriter().append(jsonString);
+			break;
 		}
 //		response.getWriter().append("Served at: ").append(request.getContextPath());
 //		response.getWriter().append("\nEmployees: \n");
@@ -88,15 +100,31 @@ public class Project1Servlet extends HttpServlet {
 	}
 
 	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
+	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse
+	 *      response)
 	 */
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	protected void doPost(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+
 		String password = "";
 		String userName = "";
 		String option = "";
-		
+		String value = "";
+		String description = "";
+		String date = "";
+
 		BufferedReader breader = request.getReader();
 		String req = breader.readLine();
+		// Checking for json strings
+//		char ch1 = req.charAt(0);
+		// Failed attempt at Jackson json parsing (date is a problem)
+//		if (ch1 == '{') {
+//			// parsing json file
+//			ObjectMapper mapper = new ObjectMapper();
+//			ReimbRequest incomingRequest = mapper.readValue(req, ReimbRequest.class);
+//			System.out.println(incomingRequest.getDescription());
+//		} else {
+
 		String[] params = req.split("&");
 		List<String> keys = new ArrayList<>();
 		List<String> vals = new ArrayList<>();
@@ -108,32 +136,37 @@ public class Project1Servlet extends HttpServlet {
 		for (int i = 0; i < keys.size(); i++) {
 			if (keys.get(i).equals("name")) {
 				userName = vals.get(i);
-			}
-			else if (keys.get(i).equals("password")) {
+			} else if (keys.get(i).equals("password")) {
 				password = vals.get(i);
-			}
-			else if (keys.get(i).equals("option")) {
+			} else if (keys.get(i).equals("option")) {
 				option = vals.get(i);
-			}
-			else if (keys.get(i).equals("createuser")) {
-				option = vals.get(i);
+			} else if (keys.get(i).equals("value")) {
+				value = vals.get(i);
+			} else if (keys.get(i).equals("description")) {
+				description = vals.get(i);
+			} else if (keys.get(i).equals("date")) {
+				date = vals.get(i);
 			}
 		}
-		
-		if (option.equals("signup")) {		
-			
+
+		if (option.equals("signup")) {
+
 			System.out.println("signup");
-			
-		}
-		else if (option.equals("createuser")) {
+
+		} else if (option.equals("createuser")) {
 			System.out.println("creating user");
-		}
-		else {
+		} else if (option.equals("addrequest")) {
+			System.out.println("adding request");
+			HttpSession session3 = request.getSession(false);
+			int usr = (int) session3.getAttribute("id");
+			ReimbRequest newReq = rDao.addNewRequest(usr, Double.parseDouble(value), description);
+		} else {
 			Employee user = uDao.getUserByName(userName);
 			if (password.equals(user.getpWord())) {
 //				response.getWriter().append("Sign in was successful!");
 				HttpSession session = request.getSession();
 				session.setAttribute("uName", user.getName());
+
 				session.setAttribute("isLoggedIn", "true");
 				session.setAttribute("id", user.getId());
 				System.out.println(session.getAttribute("uName") + " logged in");
@@ -145,6 +178,7 @@ public class Project1Servlet extends HttpServlet {
 				response.getWriter().append("failed");
 			}
 		}
+
 	}
 
 }

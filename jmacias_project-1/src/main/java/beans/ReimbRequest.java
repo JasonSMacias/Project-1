@@ -29,6 +29,14 @@ public class ReimbRequest {
 		this.date = date;
 		this.status = status;
 	}
+	public ReimbRequest(double value, String description, LocalDate date, String status) {
+		super();
+		this.empId = empId;
+		this.value = value;
+		this.description = description;
+		this.date = date;
+		this.status = "pending";
+	}
 	public ReimbRequest() {
 		super();
 	}
